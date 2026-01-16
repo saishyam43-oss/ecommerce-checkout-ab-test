@@ -1,6 +1,8 @@
-# E-commerce Checkout Redesign — A/B Test Analysis
+<h1 align="center">CartFlow Checkout Redesign — A/B Test Analysis</h1>
+  
+> *A well-powered checkout experiment that failed, and why blocking shipment was the correct decision.*
 
-> *A statistically well-powered experiment that failed, and why that matters.*
+> Product Analytics | Experimentation | Decision Ownership
 
 ---
 
@@ -16,7 +18,7 @@ A redesigned checkout experience was proposed to improve purchase conversion.
 In a large, well-powered experiment (~289k users), the treatment failed to show any statistically significant uplift and exhibited a slight negative directional effect.
 
 **Bottom Line**  
-The redesign introduces risk without evidence of benefit. Shipping would be irresponsible.
+In a surface as critical as checkout, absence of evidence is evidence of risk. The redesign was correctly blocked.
 
 ---
 
@@ -24,13 +26,17 @@ The redesign introduces risk without evidence of benefit. Shipping would be irre
 
 > *Executive-facing view of the experiment outcome*
 
-![Checkout A/B Test Dashboard](images/dashboard_summary.png)
+<div align="center">
+
+<img src="images/dashboard_summary.png" alt="Dashboard Summary"/>
+
+</div>
 
 ---
 
 ## 🏢 Business Context
 
-This project is framed around a fictional high-volume **e-commerce platform** where checkout conversion directly impacts revenue.
+This project is framed around **CartFlow**, a fictional high-volume e-commerce platform where checkout conversion directly impacts revenue.
 
 Checkout is a **high-leverage surface**:
 - Small regressions scale quickly
@@ -64,8 +70,11 @@ A one-sided hypothesis reflects the real product decision rule. Shipping only oc
 ### Sample Size
 - **Control:** 144,252 users  
 - **Treatment:** 144,349 users  
-- **Total:** 288,601 users  
+- **Total:** 288,601 users
 
+### Assignment Integrity Check
+The observed traffic split closely matched the expected 50/50 allocation, indicating **no Sample Ratio Mismatch (SRM)** and confirming correct experiment randomization.
+ 
 This sample size provides sufficient power to detect even small practical effects.
 
 ---
@@ -114,18 +123,25 @@ A failed experiment at this scale is a valid and valuable outcome. It prevents a
 
 A senior experiment does not end at “the test failed.”
 
-While the aggregate result was flat, I recommended **post-test segmentation analysis** to rule out asymmetric harm, particularly in high-risk segments.
+While the aggregate result was flat, I recommended follow-up diagnostics to ensure the redesign did not introduce **asymmetric harm** across critical segments.
 
-Key follow-up questions:
-- Did the redesign disproportionately hurt **mobile users**, where checkout friction is highest?
+### Segmentation Considerations
+Key questions proposed for deeper analysis:
+- Did the redesign disproportionately impact **mobile users**, where checkout friction is highest?
 - Were effects different for **new vs. returning customers**?
-- Did conversion drop at specific funnel steps (payment entry, address confirmation)?
+- Did conversion drop at specific checkout stages (payment entry, address confirmation)?
 
-These diagnostics help distinguish between:
-- A universally weak design  
-- Versus a design that fails overall but hides **segment-specific regressions**
+### Guardrail Metrics
+Beyond conversion, checkout experiments must respect operational guardrails.
 
-Although the redesign was not shipped, these insights would directly inform future iteration and UX improvements.
+Even if conversion had been neutral, a statistically significant increase in:
+- Page load latency  
+- Client-side errors  
+- Drop-offs during payment submission  
+
+would independently block shipment.
+
+These diagnostics help distinguish between a universally weak design and one that hides **segment- or platform-specific regressions**.
 
 ---
 
