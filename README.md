@@ -1,4 +1,4 @@
-<h1 align="center">CartFlow Checkout Redesign — A/B Test Analysis</h1>
+<h1 align="center"> 🛒 CartFlow Checkout Redesign — A/B Test Analysis</h1>
   
 > *A well-powered checkout experiment that failed, and why blocking shipment was the correct decision.*
 
