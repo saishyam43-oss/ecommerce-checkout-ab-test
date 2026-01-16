@@ -2,7 +2,7 @@
 
 ![Status: Concluded](https://img.shields.io/badge/Status-Concluded-success) ![Outcome: Negative](https://img.shields.io/badge/Outcome-Negative_Result-red) ![Stat Test: Z--Test](https://img.shields.io/badge/Stat_Test-One--Sided_Z--Test-blue) ![Power: High](https://img.shields.io/badge/Power-%3E80%25-green)
   
-> *A well-powered checkout experiment that failed, and why blocking shipment was the correct decision.*
+> *This project evaluates whether a proposed checkout redesign should ship, based on a large, well-powered A/B test on a revenue-critical surface.*
 
 > **Product Analytics | Experimentation | Decision Ownership**
 
@@ -119,6 +119,20 @@ These steps prevent biased estimates and inflated significance.
 The 95% confidence interval includes zero, confirming the null result. Crucially, the upper bound of the interval (`+0.10%`) suggests that even in the most optimistic scenario, the redesign offers **negligible upside**.
 
 Given the engineering cost of maintaining a new codebase, a "negligible upside" is effectively a loss.
+
+---
+
+## 🚫 Why “No Significant Difference” Was a Blocking Result
+
+In a low-leverage surface, a neutral result may justify iteration.
+
+Checkout is not low-leverage.
+
+With ~289k users and sufficient power to detect small effects, the absence of meaningful uplift is itself a signal. The confidence interval shows that even the most optimistic plausible outcome offers negligible upside relative to the engineering and operational risk of change.
+
+On a revenue-critical surface, **uncertain upside is not neutral**. It is downside risk.
+
+Blocking shipment was the correct decision.
 
 ---
 
