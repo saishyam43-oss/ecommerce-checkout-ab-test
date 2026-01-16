@@ -1,8 +1,10 @@
 <h1 align="center"> 🛒 CartFlow Checkout Redesign — A/B Test Analysis</h1>
+
+![Status: Concluded](https://img.shields.io/badge/Status-Concluded-success) ![Outcome: Negative](https://img.shields.io/badge/Outcome-Negative_Result-red) ![Stat Test: Z--Test](https://img.shields.io/badge/Stat_Test-One--Sided_Z--Test-blue) ![Power: High](https://img.shields.io/badge/Power-%3E80%25-green)
   
 > *A well-powered checkout experiment that failed, and why blocking shipment was the correct decision.*
 
-> Product Analytics | Experimentation | Decision Ownership
+> **Product Analytics | Experimentation | Decision Ownership**
 
 ---
 
@@ -31,6 +33,14 @@ In a surface as critical as checkout, absence of evidence is evidence of risk. T
 <img src="images/dashboard_summary.png" alt="Dashboard Summary"/>
 
 </div>
+
+---
+
+> **🛑 Guardrail Monitor:**
+> * **Latency:** 1.2s (Control) vs 1.25s (Treatment) — ✅ Stable
+> * **Errors:** 0.05% (Control) vs 0.04% (Treatment) — ✅ Stable
+>
+> *While technical performance was stable, the primary business metric failed to justify the change.*
 
 ---
 
@@ -85,25 +95,30 @@ Before analysis, experimental correctness was enforced:
 
 - Removed invalid group–landing page mismatches  
 - Deduplicated users, treating conversion as binary  
-- Ensured one valid experimental exposure per user  
+- Ensured one valid experimental exposure per user
+
+### Assignment Integrity Check (SRM)
+A Chi-Square Goodness-of-Fit test confirmed the traffic split (49.98% vs 50.02%) was statistically valid (**p = 0.88**). This ruled out any sample ratio mismatch (SRM) caused by browser-specific assignment bugs or latency.
 
 These steps prevent biased estimates and inflated significance.
 
 ---
 
-## 📊 Results
+## 📊 Results & Statistical Uncertainty
 
-| Group      | Conversion Rate |
-|-----------|-----------------|
-| Control   | **12.11%** |
-| Treatment | **11.95%** |
+| Group      | Users | Conversions | CVR |
+|-----------|-------|-------------|-----|
+| Control   | 144,252 | 17,468 | **12.11%** |
+| Treatment | 144,349 | 17,250 | **11.95%** |
 
-- **Relative Lift:** −1.4%  
-- **p-value:** 0.913  
-- **Statistical Significance:** ❌ No  
+- **Relative Lift:** -1.4%
+- **p-value:** 0.913 (Not Significant)
+- **95% Confidence Interval:** `[-0.42%, +0.10%]`
 
-### Interpretation  
-The observed difference is fully consistent with random variation. Given the scale of the experiment, the absence of lift strongly suggests the redesign provides no meaningful benefit.
+### Interpretation
+The 95% confidence interval includes zero, confirming the null result. Crucially, the upper bound of the interval (`+0.10%`) suggests that even in the most optimistic scenario, the redesign offers **negligible upside**.
+
+Given the engineering cost of maintaining a new codebase, a "negligible upside" is effectively a loss.
 
 ---
 
